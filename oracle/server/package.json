@@ -1,0 +1,21 @@
+{
+  "name": "zoneproof-server",
+  "version": "1.0.0",
+  "description": "ZoneProof combined Oracle API + Hedera (HCS/HTS) — single Node process for Render",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs",
+    "dev": "node --watch index.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@hashgraph/sdk": "^2.50.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "ethers": "^6.13.0",
+    "express": "^4.21.0"
+  }
+}
