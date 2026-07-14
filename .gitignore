@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build
+dist/
+**/dist/
+build/
+.cache/
+.vite/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Data / large files (optional keep small samples)
+data/
+!data/.gitkeep
+*.pdf
+*.mbtiles
+*.geojson
+*.ndjson
+
+# Logs / OS / IDE
+logs/
+*.log
+.DS_Store
+**/.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Hardhat / forge artifacts if present
+artifacts/
+cache/
+broadcast/
+out/

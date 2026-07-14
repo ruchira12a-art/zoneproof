@@ -1,0 +1,6 @@
+{
+  "oracleApiUrl": "${ORACLE_API_URL}",
+  "bridgeUrl": "${BRIDGE_URL}",
+  "countyId": "raleigh_nc",
+  "batchSize": 100
+}

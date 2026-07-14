@@ -1,0 +1,17 @@
+{
+  "name": "rezoning-oracle-workflow",
+  "version": "1.0.0",
+  "description": "Chainlink CRE workflow for Townhall rezoning oracle",
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@chainlink/cre-sdk": "^1.1.2",
+    "merkletreejs": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "oracleApiUrl": "http://localhost:8001",
+  "bridgeUrl": "http://localhost:3000",
+  "countyId": "raleigh_nc",
+  "batchSize": 100
+}

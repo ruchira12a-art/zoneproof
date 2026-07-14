@@ -1,0 +1,16 @@
+# CRE PROJECT SETTINGS FILE
+# Rezoning Oracle — ZoneProof
+
+staging-settings:
+  rpcs:
+    - chain-name: ethereum-testnet-sepolia
+      url: https://ethereum-sepolia-rpc.publicnode.com
+    - chain-name: hedera-testnet
+      url: https://testnet.hashio.io/api
+
+production-settings:
+  rpcs:
+    - chain-name: ethereum-testnet-sepolia
+      url: https://ethereum-sepolia-rpc.publicnode.com
+    - chain-name: hedera-testnet
+      url: https://testnet.hashio.io/api

@@ -1,0 +1,18 @@
+{
+  "name": "rezoning-oracle-contracts",
+  "version": "1.0.0",
+  "description": "RezoningOracle smart contract — Hedera EVM",
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network hederaTestnet",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network hederaMainnet",
+    "test": "hardhat test"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

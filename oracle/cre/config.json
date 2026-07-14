@@ -1,0 +1,10 @@
+{
+  "schedule": "0 */1 * * *",
+  "apiUrl": "http://localhost:8001",
+  "batchSize": 100,
+  "countyId": "raleigh_nc",
+  "contractAddress": "0xf3f8945df31ac04c09312e9e472ba7415bf356b4",
+  "hederaRpc": "https://testnet.hashio.io/api",
+  "hederaChainId": 296,
+  "consensusThreshold": 0.67
+}
