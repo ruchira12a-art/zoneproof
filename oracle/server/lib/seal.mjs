@@ -6,7 +6,6 @@ const REPORT_REGISTRY = new Map();
 
 const ORACLE_PRIVATE_KEY = process.env.HEDERA_PRIVATE_KEY || '';
 const ORACLE_ADDRESS = (process.env.HEDERA_EVM_ADDRESS || '').toLowerCase();
-const ORACLE_ENS = process.env.ORACLE_ENS || 'zoneproof.eth';
 
 export async function signReport(data) {
   const generated_at = new Date().toISOString();
@@ -15,11 +14,10 @@ export async function signReport(data) {
     site_address: data?.parcel?.site_address || '',
     total_petitions: data?.total_petitions || 0,
     on_chain_count: data?.on_chain_count || 0,
-    oracle_ens: ORACLE_ENS,
     oracle_address: ORACLE_ADDRESS,
     generated_at,
   };
-  // Match Python: sort_keys=True, separators=(',', ':')
+  // Match Python-style sorted compact JSON for stable hashing
   const keys = Object.keys(payload).sort();
   const pyJson = '{' + keys.map((k) => `"${k}":${JSON.stringify(payload[k])}`).join(',') + '}';
   const report_hash = '0x' + createHash('sha256').update(pyJson).digest('hex');
@@ -27,7 +25,9 @@ export async function signReport(data) {
   let signature = '';
   if (ORACLE_PRIVATE_KEY) {
     try {
-      const wallet = new Wallet(ORACLE_PRIVATE_KEY.startsWith('0x') ? ORACLE_PRIVATE_KEY : `0x${ORACLE_PRIVATE_KEY}`);
+      const wallet = new Wallet(
+        ORACLE_PRIVATE_KEY.startsWith('0x') ? ORACLE_PRIVATE_KEY : `0x${ORACLE_PRIVATE_KEY}`,
+      );
       signature = await wallet.signMessage(`ZoneProof Report\n${report_hash}`);
     } catch (e) {
       console.warn('[seal] sign failed:', e.message);
@@ -37,7 +37,6 @@ export async function signReport(data) {
   const seal = {
     report_hash,
     oracle_signature: signature,
-    oracle_ens: ORACLE_ENS,
     oracle_address: ORACLE_ADDRESS,
     generated_at,
     verify_url: `/api/oracle/verify/${report_hash}`,
@@ -81,7 +80,6 @@ export function verifyReport(reportHash) {
   const resp = {
     valid,
     report_hash: reportHash,
-    oracle_ens: seal.oracle_ens,
     oracle_address: seal.oracle_address,
     pin: seal.pin,
     site_address: seal.site_address,

@@ -600,7 +600,7 @@ function ParcelPanel({ pin, onClose, onParcelLoaded, mapRef }) {
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(10.5);
         doc.setTextColor(133, 77, 14);
-        doc.text('Issued by  zoneproof.eth', M + 14, y + 18);
+        doc.text('Issued by  ZoneProof Oracle', M + 14, y + 18);
 
         // Field rows — left text column
         const hcsLabel = seal.hcs_sequence != null

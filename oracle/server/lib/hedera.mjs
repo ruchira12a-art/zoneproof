@@ -95,7 +95,7 @@ export async function setupTopicsAndToken() {
   };
 }
 
-export async function hcsReportAudit({ pin, report_hash, oracle_address, generated_at, oracle_ens }) {
+export async function hcsReportAudit({ pin, report_hash, oracle_address, generated_at }) {
   const topic = topics().report;
   if (!topic) throw new Error('HCS_REPORT_AUDIT_TOPIC not set — run POST /setup first');
   if (!client) throw new Error('Hedera not configured');
@@ -104,7 +104,6 @@ export async function hcsReportAudit({ pin, report_hash, oracle_address, generat
     pin,
     report_hash,
     oracle_address,
-    oracle_ens,
     generated_at,
   });
   const tx = await new TopicMessageSubmitTransaction().setTopicId(topic).setMessage(message).execute(client);
@@ -194,7 +193,6 @@ export async function logReportToHedera(pin, seal) {
       report_hash: seal.report_hash,
       oracle_address: seal.oracle_address,
       generated_at: seal.generated_at,
-      oracle_ens: seal.oracle_ens,
     });
     extras.hcs_topic_id = d.topic_id;
     extras.hcs_sequence = d.sequence_number;

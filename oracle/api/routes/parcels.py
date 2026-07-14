@@ -23,7 +23,7 @@ _REPORT_REGISTRY: dict[str, dict] = {}
 
 ORACLE_PRIVATE_KEY  = os.getenv("HEDERA_PRIVATE_KEY", "")
 ORACLE_ADDRESS      = os.getenv("HEDERA_EVM_ADDRESS", "").lower()
-ORACLE_ENS          = os.getenv("ORACLE_ENS", "zoneproof.eth")
+
 HEDERA_SERVICE_URL  = os.getenv("HEDERA_SERVICE_URL", "http://localhost:8002")
 
 
@@ -37,7 +37,6 @@ def _sign_report(data: dict) -> dict:
         "site_address":    data.get("parcel", {}).get("site_address", ""),
         "total_petitions": data.get("total_petitions", 0),
         "on_chain_count":  data.get("on_chain_count", 0),
-        "oracle_ens":      ORACLE_ENS,
         "oracle_address":  ORACLE_ADDRESS,
         "generated_at":    generated_at,
     }
@@ -56,7 +55,6 @@ def _sign_report(data: dict) -> dict:
     seal = {
         "report_hash":      report_hash,
         "oracle_signature": signature,
-        "oracle_ens":       ORACLE_ENS,
         "oracle_address":   ORACLE_ADDRESS,
         "generated_at":     generated_at,
         "verify_url":       f"/verify/{report_hash}",
@@ -89,8 +87,7 @@ def _log_to_hedera(pin: str, seal: dict) -> dict:
                 "report_hash":    seal["report_hash"],
                 "oracle_address": seal["oracle_address"],
                 "generated_at":   seal["generated_at"],
-                "oracle_ens":     seal["oracle_ens"],
-            },
+                    },
             timeout=20.0,
         )
         if r_hcs.status_code == 200:
@@ -178,7 +175,6 @@ def verify_report(report_hash: str):
     resp: dict = {
         "valid":          valid,
         "report_hash":    report_hash,
-        "oracle_ens":     seal["oracle_ens"],
         "oracle_address": seal["oracle_address"],
         "pin":            seal["pin"],
         "site_address":   seal["site_address"],

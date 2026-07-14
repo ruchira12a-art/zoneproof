@@ -53,7 +53,7 @@ export default function TechPage() {
             </span>
           </motion.h1>
           <motion.p variants={fadeUp} className="text-slate-400 text-lg max-w-2xl mx-auto">
-            ZoneProof combines Hedera, Chainlink CRE, and ENS to replace a $12,000–$20,000
+            ZoneProof combines Hedera and Chainlink CRE to replace a $12,000–$20,000
             vendor due diligence process with cryptographic proof — verifiable in seconds.
           </motion.p>
         </motion.div>
@@ -173,23 +173,23 @@ export default function TechPage() {
           </div>
         </TechSection>
 
-        {/* ── ENS ────────────────────────────────────────────────────────────── */}
+        {/* ── ECDSA oracle identity ───────────────────────────────────────────── */}
         <TechSection
           color="#5298FF"
           bgColor="rgba(82,152,255,0.05)"
           borderColor="rgba(82,152,255,0.15)"
-          badge="ENS"
+          badge="ECDSA"
           badgeBg="rgba(82,152,255,0.15)"
-          title="zoneproof.eth — Cryptographic Oracle Identity"
-          subtitle="The ZoneProof oracle is identified by its ENS name. Every report carries a signed proof that traces back to zoneproof.eth — verifiable by anyone without trusting ZoneProof."
+          title="Cryptographic Oracle Identity"
+          subtitle="Every report is signed with the ZoneProof oracle ECDSA key. Anyone can recover the signer and match it to the published oracle address — no third-party name service required."
           logo={<ENSLogo />}
         >
           <div className="mt-6 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { num: '1', title: 'Oracle Signs', desc: 'The oracle signs every report hash with its ECDSA key (secp256k1 / EIP-191) — the same key that controls zoneproof.eth on Sepolia.' },
-                { num: '2', title: 'PDF Carries Proof', desc: 'The PDF report embeds the oracle ENS name, address, report hash, ECDSA signature, HCS sequence number, and a QR code linking to the verify page.' },
-                { num: '3', title: 'Anyone Can Verify', desc: 'Scan the QR → resolve zoneproof.eth → recover signer → confirm match. The report is genuine if the addresses match. HCS + NFT provide two additional proof layers.' },
+                { num: '1', title: 'Oracle Signs', desc: 'The oracle signs every report hash with its ECDSA key (secp256k1 / EIP-191) controlled by the ZoneProof operator account.' },
+                { num: '2', title: 'PDF Carries Proof', desc: 'The PDF report embeds the oracle address, report hash, ECDSA signature, HCS sequence number, and a QR code linking to the verify page.' },
+                { num: '3', title: 'Anyone Can Verify', desc: 'Scan the QR → recover signer from the signature → confirm it matches the oracle address. HCS + NFT provide two additional proof layers.' },
               ].map(({ num, title, desc }) => (
                 <div key={num} className="rounded-xl p-4"
                   style={{ background: 'rgba(82,152,255,0.06)', border: '1px solid rgba(82,152,255,0.15)' }}>
@@ -207,11 +207,10 @@ export default function TechPage() {
               style={{ background: 'rgba(82,152,255,0.06)', border: '1px solid rgba(82,152,255,0.12)' }}>
               <span className="text-2xl mt-0.5">🔐</span>
               <div>
-                <div className="text-sm font-bold text-blue-300 mb-1">Why ENS instead of just a raw address?</div>
+                <div className="text-sm font-bold text-blue-300 mb-1">What proves authenticity?</div>
                 <div className="text-xs text-slate-400 leading-relaxed">
-                  A raw Ethereum address is opaque. <strong className="text-slate-200">zoneproof.eth</strong> is a human-readable, decentralized identity.
-                  When a lender or tokenizer receives a PDF, they can independently look up <code className="text-blue-300">zoneproof.eth</code> to find
-                  the oracle's address without ever visiting the ZoneProof website — the identity lives on Ethereum, not on our servers.
+                  The report hash is signed by the operator key. Verifiers recover the address from the signature and
+                  check it against the published oracle EVM address — plus optional HCS audit and HTS NFT receipt.
                 </div>
               </div>
             </div>
@@ -239,9 +238,9 @@ export default function TechPage() {
               { icon: '🗺️', actor: 'User', action: 'Searches property address or PIN on the ZoneProof map', tech: null },
               { icon: '👁️', actor: 'Oracle', action: 'Shows free petition count preview (no payment)', tech: 'CRE data' },
               { icon: '💸', actor: 'User', action: 'Pays 0.05 HBAR via x402 to unlock the full report', tech: 'Hedera x402' },
-              { icon: '✍️', actor: 'Oracle', action: 'Signs report with zoneproof.eth ECDSA key', tech: 'ENS identity' },
-              { icon: '📋', actor: 'Hedera', action: 'Report hash logged to HCS Topic 0.0.9227970', tech: 'HCS' },
-              { icon: '🪙', actor: 'Hedera', action: 'ZPR NFT minted on HTS Token 0.0.9227972', tech: 'HTS' },
+              { icon: '✍️', actor: 'Oracle', action: 'Signs report with operator ECDSA key', tech: 'EIP-191' },
+              { icon: '📋', actor: 'Hedera', action: 'Report hash logged to HCS audit topic', tech: 'HCS' },
+              { icon: '🪙', actor: 'Hedera', action: 'ZPR NFT receipt minted on HTS', tech: 'HTS' },
               { icon: '📄', actor: 'User', action: 'Downloads PDF with seal, QR code, HCS seq, NFT serial', tech: 'Report' },
               { icon: '✅', actor: 'Anyone', action: 'Scans QR → /verify/hash → checks ECDSA + HCS + NFT', tech: 'All three' },
             ].map(({ icon, actor, action, tech }, i) => (
@@ -274,7 +273,7 @@ export default function TechPage() {
             Open the Map →
           </button>
           <div className="text-xs text-slate-600 mt-3">
-            Powered by Hedera · Chainlink CRE · ENS
+            Powered by Hedera · Chainlink CRE
           </div>
         </motion.div>
       </div>

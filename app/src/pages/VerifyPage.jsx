@@ -51,7 +51,7 @@ export default function VerifyPage() {
                   </div>
                   <div className="text-xs text-slate-400 mt-0.5">
                     {result.valid
-                      ? 'Signed by zoneproof.eth oracle · Logged on Hedera HCS · NFT receipt minted'
+                      ? 'ECDSA-signed by ZoneProof oracle · Logged on Hedera HCS · NFT receipt minted'
                       : result.reason || 'Signature does not match the ZoneProof oracle'}
                   </div>
                 </div>
@@ -59,8 +59,7 @@ export default function VerifyPage() {
 
               {result.valid && (
                 <div className="space-y-3">
-                  <Row label="Issued by" value={result.oracle_ens} highlight />
-                  <Row label="Oracle address" value={result.oracle_address} mono />
+                  <Row label="Oracle address" value={result.oracle_address} mono highlight />
                   <Row label="Property PIN" value={result.pin} />
                   <Row label="Property" value={result.site_address} />
                   <Row label="Generated" value={result.generated_at?.replace('T', ' ').replace('Z', ' UTC')} />

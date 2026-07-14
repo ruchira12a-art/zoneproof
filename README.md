@@ -11,7 +11,6 @@
   <p>
     <img src="https://img.shields.io/badge/Hedera-HCS%20%7C%20HTS%20%7C%20x402-00BAAD?style=flat-square&logo=hedera" />
     <img src="https://img.shields.io/badge/Chainlink-CRE%20Oracle-375BD2?style=flat-square&logo=chainlink" />
-    <img src="https://img.shields.io/badge/ENS-zoneproof.eth-5298FF?style=flat-square" />
   </p>
 </div>
 
@@ -27,7 +26,7 @@ Web3 players — companies like **RealT**, **Propy**, **Landshare**, and **Centr
 
 ## The Solution — ZoneProof
 
-ZoneProof aggregates county-level zoning data via **Chainlink CRE** oracle nodes, turns that data into a cryptographically verifiable **Zoning Oracle**, and anchors every change on **Hedera**. When a due diligence report is generated, it is cryptographically signed by **zoneproof.eth** and permanently logged on HCS — so any party can verify its authenticity in seconds, not weeks.
+ZoneProof aggregates county-level zoning data via **Chainlink CRE** oracle nodes, turns that data into a cryptographically verifiable **Zoning Oracle**, and anchors every change on **Hedera**. When a due diligence report is generated, it is cryptographically signed by the **ZoneProof oracle ECDSA key** and permanently logged on HCS — so any party can verify its authenticity in seconds, not weeks.
 
 **Impact:**
 - Web3 lenders and land tokenizers skip the $12K–$20K vendor process
@@ -76,12 +75,8 @@ graph TB
 
     subgraph "ZoneProof Oracle API"
         X402[x402 Gate<br/>0.05 HBAR per report<br/>HTTP 402 protocol]
-        SIGN[ECDSA Signing<br/>zoneproof.eth oracle key<br/>secp256k1 EIP-191]
+        SIGN[ECDSA Signing<br/>Oracle ECDSA key<br/>secp256k1 EIP-191]
         VERIFY[Verify Endpoint<br/>/verify/hash<br/>ECDSA + HCS + NFT proof]
-    end
-
-    subgraph "ENS Layer"
-        ENS[zoneproof.eth<br/>Sepolia ENS<br/>Oracle identity]
     end
 
     subgraph "User / AI Agent"
@@ -101,7 +96,6 @@ graph TB
     SIGN -->|Audit entry| HCS1
     SIGN -->|Mint receipt| HTS
     SIGN -->|Report + seal| PDF
-    ENS -->|Oracle identity| PDF
     PDF -->|QR scan verify| VERIFY
     VERIFY -->|ECDSA + HCS + NFT check| U
 
@@ -114,7 +108,6 @@ graph TB
     style N1 fill:#375BD2,color:#fff
     style N2 fill:#375BD2,color:#fff
     style N3 fill:#375BD2,color:#fff
-    style ENS fill:#5298FF,color:#fff
     style X402 fill:#7c3aed,color:#fff
     style MCP fill:#f97316,color:#fff
     style PDF fill:#f59e0b,color:#000
@@ -166,20 +159,6 @@ This means ZoneProof has **no single point of failure**: no one node can corrupt
 
 ---
 
-## ENS
-
-The ZoneProof oracle is identified by its ENS name: **`zoneproof.eth`** (registered on Sepolia).
-
-Every generated PDF report is signed with an **ECDSA key** (secp256k1 / EIP-191) whose corresponding Ethereum address is resolvable by looking up `zoneproof.eth`. The report contains the oracle's ENS name, address, a report hash, and a QR code linking to `/verify/{hash}`.
-
-Anyone can verify a ZoneProof report:
-1. Scan the QR code on the PDF → opens `/verify/{hash}`
-2. The page resolves `zoneproof.eth` → gets oracle address
-3. Recovers the signer from the ECDSA signature
-4. Confirms they match → **Authentic ZoneProof Report**
-5. Shows the HCS sequence number and ZPR NFT serial as additional proof layers
-
----
 
 ## The Full Due Diligence Flow
 
@@ -187,7 +166,7 @@ Anyone can verify a ZoneProof report:
 1. User types a property address or PIN on the ZoneProof map
 2. Map shows all rezoning petitions on the parcel (free preview)
 3. User pays 0.05 HBAR via x402 to unlock the full report
-4. Oracle signs the report with zoneproof.eth ECDSA key
+4. Oracle signs the report with the operator ECDSA key
 5. Report is logged to Hedera HCS (immutable timestamp)
 6. ZPR NFT is minted on HTS as a receipt
 7. User downloads a PDF with ECDSA seal + QR code
@@ -249,7 +228,6 @@ node server.js
 | `HEDERA_ACCOUNT_ID` | Hedera testnet account (e.g. `0.0.7952768`) |
 | `HEDERA_PRIVATE_KEY` | ECDSA private key (hex) |
 | `HEDERA_EVM_ADDRESS` | EVM address of the oracle |
-| `ORACLE_ENS` | ENS name (`zoneproof.eth`) |
 | `HCS_REPORT_AUDIT_TOPIC` | HCS topic ID for report audit |
 | `HCS_PETITION_LOG_TOPIC` | HCS topic ID for petition batches |
 | `HTS_NFT_TOKEN_ID` | HTS token ID for ZPR NFT receipts |
@@ -264,7 +242,7 @@ node server.js
 | Data oracle | Chainlink CRE (3-node BFT consensus) |
 | Blockchain | Hedera EVM, HCS, HTS, Scheduled Transactions |
 | Payments | x402 protocol (0.05 HBAR per report) |
-| Identity | ENS (`zoneproof.eth` on Sepolia) |
+| Identity | Oracle ECDSA key (EIP-191) |
 | AI agent | Hedera MCP Server (autonomous HBAR payments) |
 | Backend | FastAPI (Python), `eth-account` (ECDSA) |
 | Frontend | React, Vite, Mapbox GL JS, jsPDF |
@@ -273,5 +251,5 @@ node server.js
 ---
 
 <div align="center">
-  <sub>Chainlink CRE · Hedera · ENS</sub>
+  <sub>Chainlink CRE · Hedera</sub>
 </div>

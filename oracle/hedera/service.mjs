@@ -120,14 +120,13 @@ app.post('/hcs/report-audit', async (req, res) => {
   if (!REPORT_AUDIT_TOPIC) {
     return res.status(503).json({ error: 'HCS_REPORT_AUDIT_TOPIC not set — run POST /setup first' });
   }
-  const { pin, report_hash, oracle_address, generated_at, oracle_ens } = req.body;
+  const { pin, report_hash, oracle_address, generated_at } = req.body;
   try {
     const message = JSON.stringify({
       type:           'report_audit',
       pin,
       report_hash,
       oracle_address,
-      oracle_ens,
       generated_at,
     });
     const tx = await new TopicMessageSubmitTransaction()

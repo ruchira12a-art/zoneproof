@@ -73,7 +73,7 @@ const TECH = [
   { name: 'Mapbox', sub: 'Vector Tile Map', color: '#0ea5e9' },
   { name: 'Wake County', sub: 'Live GIS Data', color: '#22c55e' },
   { name: 'Claude AI', sub: 'Zoning Assistant', color: '#a78bfa' },
-  { name: 'ENS', sub: 'zoneproof.eth', color: '#f59e0b' },
+  { name: 'ECDSA', sub: 'Oracle signatures', color: '#f59e0b' },
 ];
 
 const fadeUp = {
