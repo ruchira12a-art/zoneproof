@@ -41,7 +41,7 @@ for (const ev of changeEventsRaw) {
 export const REZONING_PETITIONS = petitionsRaw;
 export const CHANGE_EVENTS = changeEventsRaw;
 
-console.log(
+console.error(
   `[store] Loaded  parcels=${Object.keys(PARCELS_BY_PIN).length.toLocaleString()}  ` +
     `petitions=${REZONING_PETITIONS.length.toLocaleString()}  ` +
     `change_events=${CHANGE_EVENTS.length.toLocaleString()}  ` +
