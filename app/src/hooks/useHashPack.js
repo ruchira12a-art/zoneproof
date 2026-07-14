@@ -9,8 +9,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { BrowserProvider, parseEther, getAddress } from 'ethers';
 
-export const RECEIVER_EVM = import.meta.env.VITE_HEDERA_RECEIVER_EVM || '0x85652f8479dc8dbd89adaee37d42e7c91a534294';
-export const RECEIVER_ID  = import.meta.env.VITE_HEDERA_RECEIVER     || '0.0.7952768';
+export const RECEIVER_EVM = import.meta.env.VITE_HEDERA_RECEIVER_EVM || '0xB67A63c474D94dBc4e9Fa368565cCAe12c9130E6';
+export const RECEIVER_ID  = import.meta.env.VITE_HEDERA_RECEIVER     || '0.0.9555856';
 export const HBAR_AMOUNT  = 0.05;
 
 const HEDERA_TESTNET = {
