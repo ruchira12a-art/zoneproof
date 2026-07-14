@@ -1,0 +1,21 @@
+{
+  "network": "hedera-testnet",
+  "operator": {
+    "accountId": "0.0.9555856",
+    "evmAddress": "0xB67A63c474D94dBc4e9Fa368565cCAe12c9130E6"
+  },
+  "hedera": {
+    "hcs_report_audit_topic": "0.0.9574434",
+    "hcs_petition_log_topic": "0.0.9574435",
+    "hts_zpr_nft_token": "0.0.9574436",
+    "rezoning_oracle_evm": "0x5b5E9443A254c850682d2f196aA59c9DDbfC4691"
+  },
+  "hashscan": {
+    "account": "https://hashscan.io/testnet/account/0.0.9555856",
+    "topic_report_audit": "https://hashscan.io/testnet/topic/0.0.9574434",
+    "topic_petition_log": "https://hashscan.io/testnet/topic/0.0.9574435",
+    "nft_token": "https://hashscan.io/testnet/token/0.0.9574436",
+    "rezoning_oracle": "https://hashscan.io/testnet/contract/0x5b5E9443A254c850682d2f196aA59c9DDbfC4691"
+  },
+  "notes": "Redeployed under operator 0.0.9555856. Do not commit private keys. Set secrets only on Render."
+}

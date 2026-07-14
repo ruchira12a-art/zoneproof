@@ -35,7 +35,7 @@ async function main() {
   // Hedera requires explicit gas — estimateGas is unreliable on hashio relay
   const contract = await RezoningOracle.deploy(oracleAddress, {
     gasLimit:  1_000_000,
-    gasPrice:  100_000_000_000n,  // 100 Gwei in wei
+    gasPrice:  1_500_000_000_000n,  // 1500 Gwei — above Hedera testnet minimum
   });
   await contract.waitForDeployment();
 
